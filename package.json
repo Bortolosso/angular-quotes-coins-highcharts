@@ -10,7 +10,7 @@
     "test": "ng test"
   },
   "engines": {
-    "node": "12.19.0",
+    "node": "16.10",
     "npm": "6.14.8"
   },
   "private": true,

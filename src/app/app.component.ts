@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, Optional, AfterViewInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import HighchartsSolidGauge from 'highcharts/modules/solid-gauge';
@@ -24,6 +22,7 @@ export class AppComponent {
   dataReturn: any = {};
   isPrintinginProgress = true;
   categories = [];
+  categories_period: any = [];
   coin_obj_selected: any = [];
   name_series_1 = "";
   name_series_2 = "";
@@ -44,26 +43,26 @@ export class AppComponent {
 
   public onValChangePeriod(valPeriod: string) {
     this.selectedValPeriod = valPeriod;
+    this.insertDataGraphCoin();
   };
 
   public onValChangeCoin(valCoin: string) {
     this.selectedValCoin = valCoin;
-    this.insertDataGraph();
+    this.insertDataGraphCoin();
   };
 
   getDataNotices() {
     this.quotesService.getApi().subscribe((returnApi: any) => {
       this.dataReturn = returnApi;
-      this.insertDataGraph()
+      this.insertDataGraphCoin()
     }, error => {
       console.log(error);
     });
   };
 
-  insertDataGraph() {
-    this.categories = this.dataReturn.series_date;
+  insertDataGraphCoin() {
     this.isPrintinginProgress = false;
-    console.log(this.dataReturn);
+    this.categories = this.dataReturn.series_date;
 
     if (this.selectedValCoin == "USD") {
       this.coin_obj_selected = this.dataReturn['USD'];
@@ -71,9 +70,9 @@ export class AppComponent {
       this.name_series_2 = "JPY";
       this.name_series_3 = "BRL";
 
-      this.data_series_1 = this.coin_obj_selected.EUR
-      this.data_series_2 = this.coin_obj_selected.JPY
-      this.data_series_3 = this.coin_obj_selected.BRL
+      this.data_series_1 = this.coin_obj_selected.EUR;
+      this.data_series_2 = this.coin_obj_selected.JPY;
+      this.data_series_3 = this.coin_obj_selected.BRL;
     };
 
     if (this.selectedValCoin == "EUR") {
@@ -152,3 +151,5 @@ export class AppComponent {
     } as any);
   };
 };
+
+

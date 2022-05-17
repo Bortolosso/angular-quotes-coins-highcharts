@@ -13,7 +13,7 @@ export class QuotesCoins {
     throw new Error('Method not implemented.');
   }
 
-  apiUrl:string;
+  apiUrl: string;
 
   constructor(
     private httpRequest: HttpClient,
@@ -23,10 +23,9 @@ export class QuotesCoins {
 
   getApi() {
     return this.httpRequest.get<any>(
-      `get_quotes_coins`,
+      `https://queotes-api.herokuapp.com/`,
     ).pipe(map(res => res), map((res: any) => {
       return res;
     }))
   }
-
 }

@@ -1,18 +1,37 @@
-<h1>Angular Highcharts demo</h1>
+<div id="main-head">
+  <div *ngIf="!isPrintinginProgress">
+    <section>
+      <div class="example-button-row">
+        <p>Periodo:</p>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #groupPeriod="matButtonToggleGroup"
+          [value]="selectedValPeriod" (change)="onValChangePeriod(groupPeriod.value)">
+          <mat-button-toggle value="2days">2 Dias</mat-button-toggle>
+          <mat-button-toggle value="3days">3 Dias</mat-button-toggle>
+          <mat-button-toggle value="4days">4 Dias</mat-button-toggle>
+          <mat-button-toggle value="5days">5 Dias</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
 
-<div id="main-head" style="text-align:center">
-  <section>
-    <div class="example-button-row">
-      <button mat-raised-button>Basic</button>
-      <button mat-raised-button color="primary">Primary</button>
-      <button mat-raised-button color="accent">Accent</button>
-      <button mat-raised-button color="warn">Warn</button>
-      <button mat-raised-button disabled>Disabled</button>
-    </div>
-  </section>
+    <section>
+      <div class="example-button-row">
+        <p>Moeda:</p>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style" #groupCoin="matButtonToggleGroup"
+          [value]="selectedValCoin" (change)="onValChangeCoin(groupCoin.value)">
+          <mat-button-toggle value="BRL">Real/BRL</mat-button-toggle>
+          <mat-button-toggle value="JPY">Iene/JPY</mat-button-toggle>
+          <mat-button-toggle value="EUR">Euro/EUR</mat-button-toggle>
+          <mat-button-toggle value="USD">Dolar/USD</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+  </div>
 
-  <button (click)="listarTodosProdutos()">GET</button>
+  <!-- <button (click)="listarTodosProdutos()">GET</button> -->
+  <div *ngIf="isPrintinginProgress" class="col-md-2 col-sm-2">
+    <p>Carregando . . . </p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
 
   <div id="chart-line"></div>
 </div>
-
